@@ -1,0 +1,149 @@
+﻿@using Auction.Controllers;
+@model Auction.Models.AuctionGood
+@inject AuctionsController AuctionsController
+<!--============= Hero Section Starts Here =============-->
+<div class="hero-section style-2 pb-lg-400">
+    <div class="container">
+    </div>
+    <div class="bg_img hero-bg bottom_center" data-background="@Url.Content("~/images/banner/hero-bg.png")"></div>
+</div>
+<!--============= Hero Section Ends Here =============-->
+<section class="dashboard-section padding-bottom mt--240 mt-lg--325 pos-rel">
+    <div class="container">
+        <div class="row justify-content-center">
+            <partial name="_UserPartial" />
+            <div class="col-lg-8">
+                <div class="dashboard-widget mb-40">
+                    <div class="dashboard-title mb-30">
+                        <h5 class="title">My Auction Item</h5>
+                    </div>
+                    <div class="row justify-content-center mb-30-none">
+                        <div class="col-sm-10 col-md-6 ">
+                            <div class="auction-item-2">
+                                <div class="auction-thumb">
+                                    <a href="#0"><img src="~/auction/@Model.Picture" alt="car" height="200px" width="100"></a>
+                                   
+                                    <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
+                                </div>
+                                <div class="auction-content">
+                                    <h6 class="title">
+                                        <a href="#0">@Model.Title</a>
+                                    </h6>
+                                    <div class="bid-area">
+                                        <div class="bid-amount">
+                                            <div class="icon">
+                                                <i class="flaticon-auction"></i>
+                                            </div>
+                                            <div class="amount-content">
+                                                <div class="current">Current Bid</div>
+                                                <div class="amount">$@(AuctionsController.GetHighestBidAmount(Model.Id))</div>
+                                            </div>
+                                        </div>
+                                        <div class="bid-amount">
+                                            <div class="icon">
+                                                <i class="flaticon-money"></i>
+                                            </div>
+                                            <div class="amount-content">
+                                                <div class="current">Base Price</div>
+                                                <div class="amount">$@Model.StartingPrice</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="countdown-area">
+                                        <div class="countdown">
+                                            <div id="@Model.Picture"></div>
+                                        </div>
+                                        <span class="total-bids">@(AuctionsController.GetNumberOfBids(Model.Id)) Bids</span>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <a asp-action="Updateauction" asp-route-id="@Model.Id" asp-controller="Auctions" class="custom-button">Edit</a>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <script>
+                            (function () {
+                                var targetDateTime = new Date('@Model.EndTime');
+
+                                function updateCountdown() {
+                                    var now = new Date();
+                                    var timeDifference = targetDateTime - now;
+
+                                    if (timeDifference <= 0) {
+                                        document.getElementById('@Model.Picture').innerHTML = 'Countdown expired';
+                                    } else {
+                                        var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                                        var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                        var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                                        var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+                                        document.getElementById('@Model.Picture').innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
+                                    }
+                                }
+
+                                // Update the countdown every second
+                                setInterval(updateCountdown, 1000);
+                                updateCountdown(); // Initial update
+                            })();
+                        </script>
+                        
+                    </div>
+                </div>
+                <div class="dashboard-widget">
+                    <h5 class="title mb-10">Bidding</h5>
+                    <div class="dashboard-purchasing-tabs">
+                        <ul class="nav-tabs nav">
+
+                            <li>
+                                <a href="#current" class="active" data-toggle="tab">History</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane show active fade" id="current">
+                                <table class="purchasing-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Bidder Name</th>
+                                            <th>datetime</th>
+                                            <th>unit price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            var arr = Model.Bids?.Count() ??0;
+                                        }
+                                        @if (arr != 0)
+                                        {
+
+                                            @foreach (var item in Model.Bids.OrderByDescending(b => b.BidAmount))
+                                            {
+                                                <tr>
+                                                    <td data-history="bidder">
+                                                        @(AuctionsController.GetName(item.Bidder))
+                                                    </td>
+                                                    <td data-history="date">@item.BidTime</td>
+                                                    <td data-history="unit price">$@(AuctionsController.ConvertNumber(item.BidAmount))</td>
+
+                                                </tr>
+                                            }
+                                        }
+                                        @if (arr == 0)
+                                        {
+                                            <tr>
+                                                <td class="text-center" colspan="3">No Bids Yet</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

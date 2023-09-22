@@ -1,0 +1,84 @@
+﻿@model Auction.Models.AuctionViewModel
+
+<!--============= Hero Section Starts Here =============-->
+<div class="hero-section style-2">
+    <div class="container">
+       <h2 class="text-center text-white">
+            Create Your Own Auction
+
+       </h2>
+    </div>
+    <div class="bg_img hero-bg bottom_center" data-background="@Url.Content("~/images/banner/hero-bg.png")"></div>
+</div>
+<!--============= Hero Section Ends Here =============-->
+<section class="dashboard-section padding-bottom mt--240 mt-lg--440 pos-rel">
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+
+
+                        <form asp-action="Create" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label asp-for="Title" class="control-label">Title</label>
+                                <input asp-for="Title" class="form-control" required />
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label">Description</label>
+                                <textarea asp-for="Description" required class="form-control"></textarea>
+                                <span asp-validation-for="Description"  class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="StartingPrice" class="control-label">Starting Price</label>
+                                <input asp-for="StartingPrice" required class="form-control" />
+                                <span asp-validation-for="StartingPrice" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="StartTime" class="control-label">Start Time</label>
+                                <input asp-for="StartTime" class="form-control" disabled value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+                                <span asp-validation-for="StartTime" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="EndTime" class="control-label">End Time</label>
+                                <input asp-for="EndTime" id="endtime" required class="form-control" />
+                                <span asp-validation-for="EndTime" class="text-danger"></span>
+                            </div>
+                            <script>
+                                const today = new Date();
+                                const inputDate = document.getElementById("endtime");
+
+                                inputDate.addEventListener("change", function () {
+                                    const dateValue = new Date(inputDate.value);
+                                    if (dateValue.getTime() < today.getTime()) {
+                                        inputDate.setCustomValidity("The date must be greater than today.");
+                                    } else {
+                                        inputDate.setCustomValidity("");
+                                    }
+                                });
+                            </script>
+                            <div class="form-group">
+                                <label asp-for="CategoryId" class="control-label">Category</label>
+                                <select asp-for="CategoryId" required class="form-control" asp-items="ViewBag.CategoryList">
+                                    <option value="">Select a Category</option>
+                                </select>
+                                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Picture" class="control-label">Pictures</label>
+                                <input asp-for="ImageFile" required />
+                                <span asp-validation-for="Picture" class="text-danger"></span>
+                            </div>
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                        
+                            <button type="submit" class="btn btn-primary">Create</button>
+                          
+                        </form>
+                </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </section>

@@ -1,0 +1,143 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+
+<partial name="_StatusMessage" for="StatusMessage" />
+
+<!--============= Dashboard Section Starts Here =============-->
+
+            
+          
+                <div class="row">
+                    <div class="col-12">
+                        <div class="dash-pro-item mb-30 dashboard-widget">
+                            <div class="header">
+                                <h4 class="title">Personal Details</h4>
+                                <span class="edit"><i class="flaticon-edit"></i> Edit</span>
+                            </div>
+                            <ul class="dash-pro-body">
+                                <li>
+                                    <div class="info-name">Name</div>
+                                    <div class="info-value">Albert Owens</div>
+                                </li>
+                                <li>
+                                    <div class="info-name">Date of Birth</div>
+                                    <div class="info-value">15-03-1974</div>
+                                </li>
+                                <li>
+                                    <div class="info-name">Address</div>
+                                    <div class="info-value">8198 Fieldstone Dr.La Crosse, WI 54601</div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="col-12">
+                        <div class="dash-pro-item mb-30 dashboard-widget">
+                            <div class="header">
+                                <h4 class="title">Account Settings</h4>
+                                <span class="edit"><i class="flaticon-edit"></i> Edit</span>
+                            </div>
+                            <ul class="dash-pro-body">
+                                <li>
+                                    <div class="info-name">Language</div>
+                                    <div class="info-value">English (United States)</div>
+                                </li>
+                                <li>
+                                    <div class="info-name">Time Zone</div>
+                                    <div class="info-value">(GMT-06:00) Central America</div>
+                                </li>
+                                <li>
+                                    <div class="info-name">Status</div>
+                                    <div class="info-value"><i class="flaticon-check text-success"></i> Active</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="dash-pro-item mb-30 dashboard-widget">
+                            <div class="header">
+                                <h4 class="title">Email Address</h4>
+                                <span class="edit"><i class="flaticon-edit"></i> Edit</span>
+                            </div>
+                            <ul class="dash-pro-body">
+                                <li>
+                                    <div class="info-name">Email</div>
+                                    <div class="info-value"><a href="https://pixner.net/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2544494740575116111c654248444c490b464a48">[email&#160;protected]</a></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="dash-pro-item mb-30 dashboard-widget">
+                            <div class="header">
+                                <h4 class="title">Phone</h4>
+                                <span class="edit"><i class="flaticon-edit"></i> Edit</span>
+                            </div>
+                            <ul class="dash-pro-body">
+                                <li>
+                                    <div class="info-name">Mobile</div>
+                                    <div class="info-value">+1 234-567-8925</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="dash-pro-item dashboard-widget">
+                            <div class="header">
+                                <h4 class="title">Security</h4>
+                                <span class="edit"><i class="flaticon-edit"></i> Edit</span>
+                            </div>
+                            <ul class="dash-pro-body">
+                                <li>
+                                    <div class="info-name">Password</div>
+                                    <div class="info-value">xxxxxxxxxxxxxxxx</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<!--============= Dashboard Section Ends Here =============-->
+@*<div class="row">
+    @if (!string.IsNullOrEmpty(Model.Input.ProfilePicture))
+    {
+        <div class="col-md-4">
+            <img src="~/uploads/@Model.Input.ProfilePicture" style="width:250px;height:300px;"/>
+        </div>
+    }
+    <div class="col-md-6">
+        <form id="profile-form" method="post" enctype="multipart/form-data">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Username" class="form-control" placeholder="Please choose your username." disabled />
+                <label asp-for="Username" class="form-label"></label>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number."/>
+                <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Name" class="form-control" placeholder="Please enter your phone number." />
+                <label asp-for="Input.Name" class="form-label"></label>
+                <span asp-validation-for="Input.Name" class="text-danger"></span>
+            </div>
+            <div class="m-2">
+                <label class="form-label" for="ProfilePicture">Profile Picture</label>
+                <input asp-for="Input.ImageFile"/>
+            </div>
+            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+        </form>
+    </div>
+</div>*@
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

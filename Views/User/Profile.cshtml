@@ -1,0 +1,100 @@
+﻿@using Auction.Data;
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@model Auction.Models.UserViewModel
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+    var currentUser = await UserManager.GetUserAsync(User);
+
+}
+<!--============= Hero Section Starts Here =============-->
+<div class="hero-section style-2 pb-lg-400">
+    <div class="container">
+    </div>
+    <div class="bg_img hero-bg bottom_center" data-background="@Url.Content("~/images/banner/hero-bg.png")"></div>
+</div>
+<!--============= Hero Section Ends Here =============-->
+<section class="dashboard-section padding-bottom mt--240 mt-lg--440 pos-rel">
+    <div class="container">
+        <div class="row justify-content-center">
+            <partial name="_UserPartial" />
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="dash-pro-item mb-30 dashboard-widget">
+                            <div class="header">
+                                <h4 class="title">Personal Details</h4>
+                            </div>
+                            <ul class="dash-pro-body">
+                                <li>
+                                    <div class="info-name">Name</div>
+                                    <div class="info-value">@currentUser.Name</div>
+                                </li>
+                                <li>
+                                    <div class="info-name">E-mail</div>
+                                    <div class="info-value">@currentUser.Email</div>
+                                </li>
+                                <li>
+                                    <div class="info-name">Phone</div>
+                                    <div class="info-value">@currentUser.PhoneNumber</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <form asp-action="Update" method="post" enctype="multipart/form-data">
+                        <div class="col-12">
+
+                            <div class="dash-pro-item mb-30 dashboard-widget">
+                                <div class="header">
+                                    <h4 class="title">Name</h4>
+                                    <span class="edit"><i class="flaticon-edit"></i> Edit</span>
+                                </div>
+                                <ul class="dash-pro-body">
+                                    <li>
+                                        <div class="info-name">Name:</div>
+                                        <div class="info-value"><input class="form-control" value="@currentUser.Name" asp-for="Name" /></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    <div class="col-12">
+                        <div class="dash-pro-item mb-30 dashboard-widget">
+                            <div class="header">
+                                <h4 class="title">Profile Picture</h4>
+                                    <span class="edit"><i class="flaticon-edit"></i> Edit</span>
+                            </div>
+                            <ul class="dash-pro-body">
+                                <li>
+                                    <div class="info-name">Picture</div>
+                                        <div class="info-value"><input class="form-control-file" asp-for="ImageFile" /></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12">
+
+                        <div class="dash-pro-item mb-30 dashboard-widget">
+                            <div class="header">
+                                <h4 class="title">Phone</h4>
+                                    <span class="edit"><i class="flaticon-edit"></i> Edit</span>
+                            </div>
+                            <ul class="dash-pro-body">
+                                <li>
+                                    <div class="info-name">Mobile</div>
+                                    <div class="info-value"><input class="form-control" value="@currentUser.PhoneNumber" asp-for="PhoneNumber"/></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <button class="custom-button" type="submit">Save Changes</button>
+                    </div>
+               </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

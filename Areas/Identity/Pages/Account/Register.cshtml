@@ -1,0 +1,105 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+<!--============= Hero Section Starts Here =============-->
+<div class="hero-section">
+    <div class="container">
+       
+    </div>
+    <div class="bg_img hero-bg bottom_center" data-background="@Url.Content("~/images/banner/hero-bg.png")"></div>
+</div>
+<!--============= Hero Section Ends Here =============-->
+<!--============= Account Section Starts Here =============-->
+<section class="account-section padding-bottom">
+    <div class="container">
+        <div class="account-wrapper mt--100 mt-lg--440">
+            <div class="left-side">
+                <div class="section-header">
+                    <h2 class="title">SIGN UP</h2>
+                    <p>We're happy you're here!</p>
+                </div>
+             
+                <form class="login-form" id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger text-center" role="alert"></div>
+                    <div class="form-group mb-30">
+                        <label asp-for="Input.Name"><i class="far fa-envelope"></i></label>
+                        <input asp-for="Input.Name" type="text" id="login-email" placeholder="Name">
+                        <span asp-validation-for="Input.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-30">
+                        <label asp-for="Input.Email"><i class="far fa-envelope"></i></label>
+                            <input asp-for="Input.Email" type="text" id="login-email" placeholder="Email Address">
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-30">
+                        <label asp-for="Input.Password"><i class="fas fa-lock"></i></label>
+                        <input asp-for="Input.Password" type="password" id="login-pass" placeholder="Password">
+                        <span class="pass-type"><i class="fas fa-eye"></i></span>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-30">
+                        <label asp-for="Input.ConfirmPassword"><i class="fas fa-lock"></i></label>
+                        <input asp-for="Input.ConfirmPassword" type="password" id="login-pass" placeholder="Confirm Password">
+                        <span class="pass-type"><i class="fas fa-eye"></i></span>
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+                @*    <div class="form-group checkgroup mb-30">
+                        <input type="checkbox" name="terms" id="check"><label for="check">The Sbidu Terms of Use apply</label>
+                    </div>*@
+                    <div class="form-group mb-0">
+                        <button type="submit" class="custom-button">REGISTER</button>
+                    </div>
+                </form>
+            </div>
+            <div class="right-side cl-white">
+                <div class="section-header mb-0">
+                    <h3 class="title mt-0">ALREADY HAVE AN ACCOUNT?</h3>
+                    <p>Log in and go to your Dashboard.</p>
+                    <a asp-area="Identity" asp-page="/Account/Login" class="custom-button transparent">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--============= Account Section Ends Here =============-->
+@*<div class="row">
+    <div class="col-md-4">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <h2>Create a new account.</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Name" class="form-control" aria-required="true" placeholder="Name" />
+                <label asp-for="Input.Name"></label>
+                <span asp-validation-for="Input.Name" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Email" class="form-control" aria-required="true" placeholder="name@example.com" />
+                <label asp-for="Input.Email">Email</label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.Password">Password</label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+        </form>
+    </div>
+
+     
+    </div>
+</div>*@
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

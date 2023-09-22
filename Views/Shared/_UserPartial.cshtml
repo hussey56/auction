@@ -1,0 +1,55 @@
+﻿@using Auction.Data;
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+    var currentUser = await UserManager.GetUserAsync(User);
+  
+}
+<div class="col-sm-10 col-md-7 col-lg-4">
+    <div class="dashboard-widget mb-30 mb-lg-0">
+        <div class="user">
+            <div class="thumb-area">
+                @if(currentUser.ProfilePicture != "")
+                {
+                    <div class="thumb">
+                        <img src="~/uploads/@currentUser.ProfilePicture" alt="user">
+                    </div>
+                }
+                @if(currentUser.ProfilePicture == "")
+                {
+                    <div class="thumb">
+                        <img src="~/images/dashboard/user.png" alt="user">
+                    </div>
+                }
+            </div>
+            <div class="content">
+                <h5 class="title"><a href="#0">@currentUser.Name</a></h5>
+                <span class="username"><a href="#0" class="__cf_email__" >@currentUser.UserName</a></span>
+            </div>
+        </div>
+        <ul class="dashboard-menu">
+            <li>
+                <a asp-action="Index" asp-controller="User"><i class="flaticon-dashboard"></i>Dashboard</a>
+            </li>
+            <li>
+                <a asp-action="Profile" asp-controller="User"><i class="flaticon-settings"></i>Personal Profile </a>
+            </li>
+            <li>
+                <a asp-action="Winningbids" asp-controller="User"><i class="flaticon-best-seller"></i>Winning Bids</a>
+            </li>
+            <li>
+                <a asp-action="Myauctions" asp-controller="User"><i class="flaticon-alarm"></i>My Auctions</a>
+            </li>
+            <li>
+                <a asp-action="Password" asp-controller="User"><i class="flaticon-settings"></i>Change Password</a>
+            </li>
+            <li>
+                 <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button class="btn btn-outline-primary" type="submit" ><i class="flaticon-signout"></i>Logout</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</div>

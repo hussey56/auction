@@ -1,0 +1,365 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Auction</title>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/all.min.css">
+    <link rel="stylesheet" href="~/css/animate.css">
+    <link rel="stylesheet" href="~/css/nice-select.css">
+    <link rel="stylesheet" href="~/css/owl.min.css">
+    <link rel="stylesheet" href="~/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/css/flaticon.css">
+    <link rel="stylesheet" href="~/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="~/css/main.css">
+
+    <link rel="shortcut icon" href="~/images/favicon.png" type="image/x-icon">
+</head>
+<body>
+    <!--============= ScrollToTop Section Starts Here =============-->
+    <div class="overlayer" id="overlayer">
+        <div class="loader">
+            <div class="loader-inner"></div>
+        </div>
+    </div>
+    <a href="#0" class="scrollToTop"><i class="fas fa-angle-up"></i></a>
+    <div class="overlay"></div>
+    <!--============= Header Section Starts Here =============-->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-wrapper">
+                    <ul class="customer-support">
+                        <li>
+                            <a href="#0" class="mr-3"><i class="fas fa-phone-alt"></i><span class="ml-2 d-none d-sm-inline-block">Customer Support</span></a>
+                        </li>
+                    
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="container">
+                <div class="header-wrapper">
+                    <div class="logo">
+                        <a href="/">
+                            <img src="~/images/logo/logo.png" alt="logo">
+                        </a>
+                    </div>
+                    <ul class="menu ml-auto">
+                        <li>
+                            <a href="/">Home</a>
+                          
+                        </li>
+                
+                        <li>
+                            <a asp-action="Index" asp-controller="Auctions">Auctions</a>
+                        </li>
+                  
+                    
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>
+                                <a href="#0">Dashboard</a>
+                                <ul class="submenu">
+                                    <li>
+                                        <a asp-action="Index" asp-controller="User">Dashboard</a>
+                                    </li>
+                                    <li>
+                                        <a asp-action="Profile" asp-controller="User">Personal Profile </a>
+                                    </li>
+                                    <li>
+                                        <a asp-action="Winningbids" asp-controller="User">Winning Bids</a>
+                                    </li>
+                                    <li>
+                                        <a asp-action="Myauctions" asp-controller="User">My Auctions</a>
+                                    </li>
+                                
+                                    <li>
+                                        <a asp-action="Create" asp-controller="Auctions">Create Auction</a>
+                                    </li>
+                                    <li>
+                                        <a asp-action="Adminindex" asp-controller="Auctions">Auction History</a>
+                                    </li>
+
+
+                                </ul>
+                            </li>
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a asp-action="Index" asp-controller="Categories">Categories</a>
+                            </li>
+                            <li>
+                                <a asp-action="Index" asp-controller="Messages">Messages</a>
+                            </li>
+                            <li>
+                                <a asp-action="Allusers" asp-controller="User">Users</a>
+                            </li>
+   
+                        }
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li>
+                                <a href="#0">My Account</a>
+                                <ul class="submenu">
+                                    <li>
+                                        <a asp-area="Identity" asp-page="/Account/Register">Sign Up</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="Identity" asp-page="/Account/Login">Sign In</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        @if (!User.IsInRole("Admin"))
+                        {
+                        <li>
+                            <a asp-action="About" asp-controller="About">About Us</a>
+                        </li>
+                        <li>
+                            <a asp-action="Create" asp-controller="Messages">Contact</a>
+                        </li>
+                        }
+                    </ul>
+                    <form class="search-form" asp-action="Search" asp-controller="Auctions">
+                        <input type="text" name="searchText" placeholder="Search for brand, model...." required>
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                    <div class="search-bar d-md-none">
+                        <a href="#0"><i class="fas fa-search"></i></a>
+                    </div>
+                    <div class="header-bar d-lg-none">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--============= Header Section Ends Here =============-->
+
+   
+
+
+  
+   
+    <div>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <!--============= Footer Section Starts Here =============-->
+    <footer class="bg_img padding-top oh" data-background="@Url.Content("~/images/footer/footer-bg.jpg")">
+        <div class="footer-top-shape">
+            <img src="~/css/img/footer-top-shape.png" alt="css">
+        </div>
+        <div class="anime-wrapper">
+            <div class="anime-1 plus-anime">
+                <img src="~/images/footer/p1.png" alt="footer">
+            </div>
+            <div class="anime-2 plus-anime">
+                <img src="~/images/footer/p2.png" alt="footer">
+            </div>
+            <div class="anime-3 plus-anime">
+                <img src="~/images/footer/p3.png" alt="footer">
+            </div>
+            <div class="anime-5 zigzag">
+                <img src="~/images/footer/c2.png" alt="footer">
+            </div>
+            <div class="anime-6 zigzag">
+                <img src="~/images/footer/c3.png" alt="footer">
+            </div>
+            <div class="anime-7 zigzag">
+                <img src="~/images/footer/c4.png" alt="footer">
+            </div>
+        </div>
+        <div class="newslater-wrapper">
+            <div class="container">
+                <div class="newslater-area">
+                    <div class="newslater-thumb">
+                        <img src="~/images/footer/newslater.png" alt="footer">
+                    </div>
+                    <div class="newslater-content">
+                        <div class="section-header left-style mb-low">
+                            <h5 class="cate">Subscribe to Sbidu</h5>
+                            <h3 class="title">To Get Exclusive Benefits</h3>
+                        </div>
+                        <form class="subscribe-form">
+                            <input type="text" placeholder="Enter Your Email" name="email">
+                            <button type="submit" class="custom-button">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-top padding-bottom padding-top">
+            <div class="container">
+                <div class="row mb--60">
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="footer-widget widget-links">
+                            <h5 class="title">Auction Categories</h5>
+                            <ul class="links-list">
+                                <li>
+                                    <a asp-controller="Auctions" asp-action="CategoryGoods" asp-route-id="8">Vehicles</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Auctions" asp-action="CategoryGoods" asp-route-id="10">Watches</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Auctions" asp-action="CategoryGoods" asp-route-id="11">Electronics</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Auctions" asp-action="CategoryGoods" asp-route-id="7">Real Estate</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Auctions" asp-action="CategoryGoods" asp-route-id="9">Jewelry</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Auctions" asp-action="CategoryGoods" asp-route-id="15">Art</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Auctions" asp-action="CategoryGoods" asp-route-id="12">Sports & Outdoor</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="footer-widget widget-links">
+                            <h5 class="title">About Us</h5>
+                            <ul class="links-list">
+                                <li>
+                                    <a href="#0">About Sbidu</a>
+                                </li>
+                                <li>
+                                    <a href="#0">Help</a>
+                                </li>
+                                <li>
+                                    <a href="#0">Affiliates</a>
+                                </li>
+                                <li>
+                                    <a href="#0">Jobs</a>
+                                </li>
+                                <li>
+                                    <a href="#0">Press</a>
+                                </li>
+                                <li>
+                                    <a href="#0">Our blog</a>
+                                </li>
+                                <li>
+                                    <a href="#0">Collectors' portal</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="footer-widget widget-links">
+                            <h5 class="title">We're Here to Help</h5>
+                            <ul class="links-list">
+                                <li>
+                                    <a href="#0">Your Account</a>
+                                </li>
+                                <li>
+                                    <a href="#0">Safe and Secure</a>
+                                </li>
+                                <li>
+                                    <a href="#0">Shipping Information</a>
+                                </li>
+                                <li>
+                                    <a href="#0">Contact Us</a>
+                                </li>
+                                <li>
+                                    <a href="#0">Help & FAQ</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="footer-widget widget-follow">
+                            <h5 class="title">Follow Us</h5>
+                            <ul class="links-list">
+                                <li>
+                                    <a href="#0"><i class="fas fa-phone-alt"></i>(646) 663-4575</a>
+                                </li>
+                                <li>
+                                    <a href="#0"><i class="fas fa-blender-phone"></i>(646) 968-0608</a>
+                                </li>
+                                <li>
+                                    <a href="#0"><i class="fas fa-envelope-open-text"></i><span class="__cf_email__" data-cfemail="69010c0519290c070e061d010c040c470a0604">[email&#160;protected]</span></a>
+                                </li>
+                                <li>
+                                    <a href="#0"><i class="fas fa-location-arrow"></i>1201 Broadway Suite</a>
+                                </li>
+                            </ul>
+                            <ul class="social-icons">
+                                <li>
+                                    <a href="#0" class="active"><i class="fab fa-facebook-f"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#0"><i class="fab fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#0"><i class="fab fa-instagram"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#0"><i class="fab fa-linkedin-in"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="copyright-area">
+                    <div class="footer-bottom-wrapper">
+                        <div class="logo">
+                            <a href="index.html"><img src="~/images/logo/footer-logo.png" alt="logo"></a>
+                        </div>
+                        <ul class="gateway-area">
+                            <li>
+                                <a href="#0"><img src="~/images/footer/paypal.png" alt="footer"></a>
+                            </li>
+                            <li>
+                                <a href="#0"><img src="~/images/footer/visa.png" alt="footer"></a>
+                            </li>
+                            <li>
+                                <a href="#0"><img src="~/images/footer/discover.png" alt="footer"></a>
+                            </li>
+                            <li>
+                                <a href="#0"><img src="~/images/footer/mastercard.png" alt="footer"></a>
+                            </li>
+                        </ul>
+                        <div class="copyright"><p>&copy; Copyright 2023 | <a href="#0">Sbidu</a> By <a href="#0">HSOF</a></p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--============= Footer Section Ends Here =============-->
+    <script data-cfasync="false" src="~/js/cloudflare-static/email-decode.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/modernizr-3.6.0.min.js"></script>
+    <script src="~/js/plugins.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/isotope.pkgd.min.js"></script>
+    <script src="~/js/wow.min.js"></script>
+    <script src="~/js/waypoints.js"></script>
+    <script src="~/js/nice-select.js"></script>
+    <script src="~/js/counterup.min.js"></script>
+    <script src="~/js/owl.min.js"></script>
+    <script src="~/js/magnific-popup.min.js"></script>
+    <script src="~/js/yscountdown.min.js"></script>
+    <script src="~/js/jquery-ui.min.js"></script>
+    <script src="~/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

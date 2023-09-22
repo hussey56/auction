@@ -1,0 +1,35 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
+    {
+        Layout = parentLayout.ToString();
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+<!--============= Hero Section Starts Here =============-->
+<div class="hero-section style-2">
+    <div class="container">
+        
+    </div>
+    <div class="bg_img hero-bg bottom_center" data-background="@Url.Content("~/images/banner/hero-bg.png")"></div>
+</div>
+<!--============= Hero Section Ends Here =============-->
+
+    <section class="dashboard-section padding-bottom mt--240 mt-lg--440 pos-rel">
+        <div class="container">
+            <div class="row justify-content-center">
+            <partial name="_ManageNav" />
+        
+            <div class="col-lg-8">
+            @RenderBody()
+        </div>
+
+    </div>
+</div>
+</section>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}
